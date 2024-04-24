@@ -79,8 +79,8 @@ export const POST = async (req: Request, {params}:{params:{courseId:string}})=>{
             customer:stripeCustomer?.stripeCustomerId,
             line_items,
             mode:"payment",
-            success_url:`${process.env.NEXT_PUBLIC_URL}/courses/${params.courseId}/success=1`,
-            cancel_url:`${process.env.NEXT_PUBLIC_URL}/courses/${params.courseId}/cancel=1`,
+            success_url:`${process.env.NEXT_PUBLIC_URL}/courses/${params.courseId}`,
+            cancel_url:`${process.env.NEXT_PUBLIC_URL}/courses/${params.courseId}`,
             metadata:{
                 courseId:params.courseId,
                 userId:user.id
