@@ -29,7 +29,7 @@ const Chapter = async ({
     },
   });
   if (!chapter) {
-    return redirect("/");
+    return redirect(`/teacher/courses/${params.courseId}`);
   }
 
   const requiredField = [chapter.title, chapter.description, chapter.videoUrl];
