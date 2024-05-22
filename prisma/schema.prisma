@@ -109,6 +109,7 @@ model Purchase {
   @@index([courseId])
 
 }
+
 model StripeCustomer {
   id     String @id @default(auto()) @map("_id") @db.ObjectId
   userId String @unique

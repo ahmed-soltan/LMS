@@ -36,7 +36,7 @@ const SidebarRoutes = () => {
     const pathname = usePathname()
     
     const isTeacher = pathname?.includes('/teacher')
-    const routes = isTeacher ?teacherRoutes : guestRoutes
+    const routes = isTeacher ? teacherRoutes : guestRoutes
   return (
     <div className="flex flex-col items-start w-full">
         {routes.map(route=>{

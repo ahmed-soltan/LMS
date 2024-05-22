@@ -19,42 +19,43 @@ const CourseAction = ({
   isPublished,
   disabled,
 }: CourseActionProps) => {
-    const [isLoading , setIsLoading] = useState(false)
-    const router = useRouter();
-    const confetti = useConfettiStore()
-    const onClick = async () => {
-        try {
-            setIsLoading(true)
-            if(isPublished){
-                await axios.patch(`/api/courses/${courseId}/unpublish`)
-                toast.success("Course unPublished successfully");
-            }else{
-                await axios.patch(`/api/courses/${courseId}/publish`);
-                toast.success("Course Published successfully");
-                confetti.setOpen()
-            }
-          router.refresh();
-        //   router.push(`/teacher/courses/${courseId}`)
-        } catch (error) {
-          toast.error("Something went wrong");
-        } finally {
-            setIsLoading(false);
-        }
-      };
-    const onDelete = async () => {
-        try {
-            setIsLoading(true)
-          await axios.delete(`/api/courses/${courseId}`);
-          toast.success("Course Delete successfully");
-          router.refresh();
-          router.push(`/teacher/courses`)
-        } catch (error) {
-          toast.error("Something went wrong");
-        } finally {
-            setIsLoading(false);
-        }
-      };
-    
+  const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
+  const confetti = useConfettiStore();
+  const onClick = async () => {
+    try {
+      setIsLoading(true);
+      if (isPublished) {
+        await axios.patch(`/api/courses/${courseId}/unpublish`);
+        toast.success("Course unPublished successfully");
+      } else {
+        await axios.patch(`/api/courses/${courseId}/publish`);
+        toast.success("Course Published successfully");
+        confetti.setOpen();
+      }
+      router.refresh();
+      //   router.push(`/teacher/courses/${courseId}`)
+    } catch (error) {
+      toast.error("Something went wrong");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  const onDelete = async () => {
+    try {
+      setIsLoading(true);
+      await axios.delete(`/api/courses/${courseId}`);
+      toast.success("Course Delete successfully");
+      router.refresh();
+      router.push(`/teacher/courses`);
+    } catch (error) {
+      toast.error("Something went wrong");
+      console.log(error)
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <div className="flex items-center gap-x-2">
       <Button

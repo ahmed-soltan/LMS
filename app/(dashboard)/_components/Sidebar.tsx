@@ -7,7 +7,7 @@ const Sidebar = () => {
         <div className="p-6">
             <Logo/>
         </div>
-        <div className="flex flex0col items-start h-full">
+        <div className="flex flex-col items-start h-full">
             <SidebarRoutes/>
         </div>
     </div>

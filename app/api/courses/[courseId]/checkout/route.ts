@@ -34,6 +34,7 @@ export const POST = async (req: Request, {params}:{params:{courseId:string}})=>{
                 status: 400
             })
         }
+        
         if(!course){
             return NextResponse.json({
                 error: "Course Not Found",
@@ -89,6 +90,6 @@ export const POST = async (req: Request, {params}:{params:{courseId:string}})=>{
 
         return NextResponse.json({url:session.url})
     } catch (error) {
-        
+
     }
 }

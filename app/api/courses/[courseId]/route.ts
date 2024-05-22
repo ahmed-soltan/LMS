@@ -44,11 +44,11 @@ export const DELETE = async (
         });
       }
 
-      for(const chapter of course.chapters) {
-        if(chapter.muxData?.assetId) {
-          await video.assets.delete(chapter.muxData.assetId);
-        }
-      }
+      // for(const chapter of course.chapters) {
+      //   if(chapter.muxData?.assetId) {
+      //     await video.assets.delete(chapter.muxData.assetId);
+      //   }
+      // }
 
 
   
