@@ -42,7 +42,7 @@ const ChapterVideoForm = ({
   const onSubmit = async (data:string) => {
     console.log(data);
     try {
-      await axios.patch(`/api/courses/${courseId}/chapters/${chapterId}`, data);
+      await axios.patch(`/api/courses/${courseId}/chapters/${chapterId}`, {videoUrl:data});
       toast.success("Chapter updated successfully");
       toggleEdit();
       router.refresh();
