@@ -36,7 +36,7 @@ interface CategoryFormProps {
 
 const formSchema = z.object({
   categoryId: z.string().min(1, {
-    message: "description is required",
+    message: "Category is required",
   }),
 });
 
@@ -83,7 +83,7 @@ const CategoryForm = ({ initialData, courseId , options}: CategoryFormProps) => 
       {!isEditting && <p className={cn(
         "text-sm mt-2",
         !initialData.categoryId &&"text-slate-500 italic"
-      )}>{selectedOption?.label || "No Description"}</p>}
+      )}>{selectedOption?.label || "No Category Provided"}</p>}
       {isEditting && (
         <Form {...form}>
           <form

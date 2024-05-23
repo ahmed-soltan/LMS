@@ -50,6 +50,7 @@ const ChaptersForm = ({ initialData, courseId }: ChaptersFormProps) => {
     setIsCreating(!isCreating);
   };
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
+    
     try {
         await axios.post(`/api/courses/${courseId}/chapters` , data);
         toast.success("Chapter Created successfully");
@@ -57,8 +58,11 @@ const ChaptersForm = ({ initialData, courseId }: ChaptersFormProps) => {
         router.refresh()
     } catch (error) {
         toast.error("something went wrong")
+    }finally{
+      form.reset()
     }
   };
+
   const onReorder=async(updateData: { id: string; position: number }[]) => {
     try {
       setIsUpdating(true);

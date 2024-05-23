@@ -39,7 +39,7 @@ const ChapterVideoForm = ({
   const toggleEdit = () => {
     setIsEditting(!isEditting);
   };
-  const onSubmit = async (data: z.infer<typeof formSchema>) => {
+  const onSubmit = async (data:string) => {
     console.log(data);
     try {
       await axios.patch(`/api/courses/${courseId}/chapters/${chapterId}`, data);
@@ -96,7 +96,7 @@ const ChapterVideoForm = ({
             endpoint="ChapterVideo"
             onChange={(url) => {
               if (url) {
-                onSubmit({ videoUrl: url });
+                onSubmit(url);
               }
             }}
           />
