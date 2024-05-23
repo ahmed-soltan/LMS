@@ -70,7 +70,7 @@ const VideoPlayer = ({
       )}
 
       {!isBlocked && video && (
-        <div className="flex flex-col items-center justify-between p-3 w-full">
+        <div className="flex flex-col items-center justify-between p-3 w-full max-h-[400px]">
           <video
             className="w-full rounded-md h-full"
             controls
