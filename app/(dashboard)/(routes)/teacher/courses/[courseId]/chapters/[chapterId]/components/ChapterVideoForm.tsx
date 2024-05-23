@@ -29,13 +29,7 @@ const ChapterVideoForm = ({
 }: ChapterVideoFormProps) => {
   const [isEditting, setIsEditting] = useState(false);
   const router = useRouter();
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      videoUrl: initialData.videoUrl || "",
-    },
-  });
-  const { isValid, isSubmitting } = form.formState;
+
   const toggleEdit = () => {
     setIsEditting(!isEditting);
   };

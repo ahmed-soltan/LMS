@@ -63,7 +63,7 @@ export const PATCH = async (
   try {
     const body = await req.json();
     const { userId } = auth();
-    const { isPublished, videoUrl, ...values } = body;
+    const { isPublished,...values } = body;
 
     if (!userId) {
       return NextResponse.json({ error: "You must be signed in to update a chapter", status: 401 });
