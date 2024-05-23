@@ -1,8 +1,6 @@
 "use client";
 
 import { useConfettiStore } from "@/hooks/use-confetti-store";
-import { cn } from "@/lib/utils";
-import MuxPlayer from "@mux/mux-player-react";
 import axios from "axios";
 import { Loader2, Lock } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -14,9 +12,9 @@ interface VideoPlayerProps {
   courseId: string;
   title: string;
   nextChapterId?: string;
-  playbackId: string;
   isBlocked: boolean;
   completeOnEnd: boolean;
+  video: string;
 }
 
 const VideoPlayer = ({
@@ -24,9 +22,9 @@ const VideoPlayer = ({
   courseId,
   title,
   nextChapterId,
-  playbackId,
   isBlocked,
   completeOnEnd,
+  video,
 }: VideoPlayerProps) => {
   const [isReady, setIsReady] = useState(false);
   const router = useRouter();
@@ -49,12 +47,11 @@ const VideoPlayer = ({
       toast.success("Progress updated successfully");
       router.refresh();
       if (nextChapterId) {
-        router.push(`/courses/${courseId}/chapters/${chapterId}`);
+        router.push(`/courses/${courseId}/chapters/${nextChapterId}`);
       }
     } catch (error) {
       console.log(error);
       toast.error("Something went wrong. Please try again");
-    } finally {
     }
   };
 
@@ -72,14 +69,18 @@ const VideoPlayer = ({
         </div>
       )}
 
-      {!isBlocked && (
-        <MuxPlayer
-          title={title}
-          className={cn(!isReady && "hidden")}
-          onCanPlay={() => setIsReady(true)}
-          onEnded={onEnd}
-          playbackId={playbackId}
-        />
+      {!isBlocked && video && (
+        <div className="flex flex-col items-center justify-between p-3 w-full">
+          <video
+            className="w-full rounded-md h-full"
+            controls
+            onCanPlay={() => setIsReady(true)}
+            onEnded={onEnd}
+          >
+            <source src={video} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
       )}
     </div>
   );

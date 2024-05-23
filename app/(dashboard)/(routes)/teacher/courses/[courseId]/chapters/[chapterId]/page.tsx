@@ -24,9 +24,6 @@ const Chapter = async ({
       id: params.chapterId,
       courseId: params.courseId,
     },
-    include: {
-      muxData: true,
-    },
   });
   if (!chapter) {
     return redirect(`/teacher/courses/${params.courseId}`);

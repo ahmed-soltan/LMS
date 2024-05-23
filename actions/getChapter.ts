@@ -1,4 +1,4 @@
-import { Attachment, Chapter, MuxData } from "@prisma/client";
+import { Attachment, Chapter } from "@prisma/client";
 import prisma from "../lib/prismadb";
 interface getChapterProps {
   courseId: string;
@@ -42,7 +42,6 @@ export const getChapter = async ({
     }
 
     let attachments: Attachment[] = [];
-    let muxData = null;
     let nextChapter: Chapter | null = null;
 
     if (purchase) {
@@ -53,13 +52,7 @@ export const getChapter = async ({
       });
     }
 
-    if (purchase || chapter.isFree) {
-      muxData = await prisma.muxData.findUnique({
-        where: {
-          chapterId: chapter.id,
-        },
-      });
-    }
+
 
     nextChapter = await prisma.chapter.findFirst({
       where: {
@@ -87,7 +80,6 @@ export const getChapter = async ({
         course,
         chapter,
         attachments,
-        muxData,
         nextChapter,
         userProgress,
         purchase
@@ -98,7 +90,6 @@ export const getChapter = async ({
     return {
       chapter: null,
       course: null,
-      muxData: null,
       userProgress: null,
       purchase: null,
       nextChapter: null,

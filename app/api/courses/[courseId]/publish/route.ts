@@ -2,11 +2,7 @@ import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 import prisma from "../../../../../lib/prismadb";
 
-import Mux from "@mux/mux-node";
-const { video } = new Mux({
-  tokenId: process.env.MUX_TOKEN_ID,
-  tokenSecret: process.env.MUX_TOKEN_SECRET,
-});
+
 
 export const PATCH = async (
   req: Request,
@@ -27,11 +23,7 @@ export const PATCH = async (
         id: params.courseId,
       },
       include:{
-        chapters:{
-          include:{
-            muxData:true
-          }
-        }
+        chapters:true
       }
     });
 

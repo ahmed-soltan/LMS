@@ -3,7 +3,7 @@
 import FileUpload from "@/components/file-upload";
 import { Button } from "@/components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Chapter, MuxData } from "@prisma/client";
+import { Chapter } from "@prisma/client";
 import axios from "axios";
 import { Pencil, PlusCircle, Video } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -11,10 +11,9 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { z } from "zod";
-import MuxPlayer from '@mux/mux-player-react'
 
 interface ChapterVideoFormProps {
-  initialData: Chapter & { muxData?: MuxData | null };
+  initialData: Chapter;
   courseId: string;
   chapterId: string;
 }
@@ -49,6 +48,7 @@ const ChapterVideoForm = ({
       router.refresh();
     } catch (error) {
       toast.error("something went wrong");
+      console.log(error);
     }
   };
 
@@ -84,9 +84,10 @@ const ChapterVideoForm = ({
       )}
       {!isEditting && initialData?.videoUrl && (
         <div className="relative aspect-video mt-2">
-          <MuxPlayer
-            playbackId={initialData?.muxData?.playbackId || ""}
-          />
+          <video className="w-full rounded-md h-full" controls>
+            <source src={initialData?.videoUrl} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
         </div>
       )}
       {isEditting && (

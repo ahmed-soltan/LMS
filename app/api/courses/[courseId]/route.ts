@@ -1,13 +1,8 @@
-import { MuxData } from '@prisma/client';
 import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 import prisma from '../../../../lib/prismadb'
 
-import Mux from '@mux/mux-node';
-const {video} = new Mux({
-  tokenId: process.env.MUX_TOKEN_ID,
-  tokenSecret: process.env.MUX_TOKEN_SECRET
-});
+
 export const DELETE = async (
     req: Request,
     { params }: { params: { courseId: string; } }
@@ -29,11 +24,7 @@ export const DELETE = async (
           userId: userId,
         },
         include:{
-            chapters:{
-                include:{
-                    muxData:true
-                }
-            }
+            chapters:true
         }
       });
   
@@ -43,12 +34,6 @@ export const DELETE = async (
           status: 404,
         });
       }
-
-      // for(const chapter of course.chapters) {
-      //   if(chapter.muxData?.assetId) {
-      //     await video.assets.delete(chapter.muxData.assetId);
-      //   }
-      // }
 
 
   

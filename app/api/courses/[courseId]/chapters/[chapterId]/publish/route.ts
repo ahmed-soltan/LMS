@@ -2,11 +2,7 @@ import { auth } from "@clerk/nextjs";
 import { NextResponse } from "next/server";
 import prisma from "../../../../../../../lib/prismadb";
 
-import Mux from "@mux/mux-node";
-const { video } = new Mux({
-  tokenId: process.env.MUX_TOKEN_ID,
-  tokenSecret: process.env.MUX_TOKEN_SECRET,
-});
+
 
 export const PATCH = async (
   req: Request,
@@ -28,15 +24,10 @@ export const PATCH = async (
         courseId: params.courseId,
       },
     });
-    const muxData = await prisma.muxData.findUnique({
-      where: {
-        chapterId: params.chapterId,
-      },
-    });
+
 
     if (
       !chapter ||
-      !muxData ||
       !chapter.title ||
       !chapter.description ||
       !chapter.videoUrl
