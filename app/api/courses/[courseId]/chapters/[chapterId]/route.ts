@@ -31,7 +31,20 @@ export const DELETE = async (
       },
     });
 
-
+    // Shift positions of the remaining chapters
+    await prisma.chapter.updateMany({
+      where: {
+        courseId: params.courseId,
+        position: {
+          gt: chapter.position,
+        },
+      },
+      data: {
+        position: {
+          decrement: 1,
+        },
+      },
+    });
 
     const isAnyChapterExist = await prisma.chapter.findMany({
       where: {

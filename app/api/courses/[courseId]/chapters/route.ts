@@ -36,7 +36,7 @@ export const POST = async(req:Request , {params}:{params:{courseId:string}})=>{
                 position:"desc"
             }
         })
-        const newPosition = lastChapter ? lastChapter.position+1 : 1;
+        const newPosition = lastChapter ? lastChapter.position+1 : 0;
         
         const newChapter = await prisma.chapter.create({
             data:{
