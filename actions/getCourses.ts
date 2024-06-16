@@ -21,6 +21,7 @@ export const GetCourses = async ({ userId, title, categoryId }: GetCourses) => {
         isPublished: true,
         title: {
             contains: title,
+            mode: 'insensitive'
         },
         categoryId
       },
